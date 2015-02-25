@@ -63,10 +63,13 @@
                     $('#log').prepend('그리드 그리기 완료<br/><br/>');
                 },
 
+                loadError : ajaxErrorHandler
+                /*
                 loadError: function(xhr, status, error) {
-                    $('#log').prepend('HTTP status code: ' + jqXHR.status + ' ' + 'textStatus: ' + textStatus + ' ' + 'errorThrown: ' + errorThrown + '<br/>');
-                    $('#log').prepend('HTTP message body (jqXHR.responseText): ' + jqXHR.responseText + "<br/><br/>");
+                    $('#log').prepend('HTTP status code: ' + xhr.status + ' ' + 'textStatus: ' + status + ' ' + 'errorThrown: ' + error + '<br/>');
+                    $('#log').prepend('HTTP message body (jqXHR.responseText): ' + xhr.responseText + "<br/><br/>");
                 }
+                */
 
             });
 
@@ -80,11 +83,20 @@
         });
 
         function selectRow() {
-            jQuery('#jqGrid').jqGrid('setSelection', '1');
+            jQuery('#jqGrid').jqGrid('setSelection', '75');
+        }
+        
+        function ajaxStatusCodeTest() {
+        	$.ajax({
+       			type: "get",
+       			url: "/testsetsetset",
+       			dataType: "json"
+       		}); 
         }
     </script>
 </head>
 <body>
+	<button type="button" onclick="ajaxStatusCodeTest();">ajax status code 테스트</button>
 
     <div>
         <select id="select_type">
@@ -100,7 +112,7 @@
     <table id="jqGrid"></table>
     <div id="jqGridPager"></div>
 
-    <button type="button" onclick="selectRow();">키1 로 로우 선택</button>
+    <button type="button" onclick="selectRow();">키75 로 로우 선택</button>
 
     <div id="log"></div>
 </body>

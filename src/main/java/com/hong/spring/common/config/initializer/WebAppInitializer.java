@@ -1,6 +1,8 @@
 package com.hong.spring.common.config.initializer;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -12,6 +14,8 @@ import com.hong.spring.common.config.RootConfig;
 import com.hong.spring.common.config.SecurityConfig;
 import com.hong.spring.common.config.WebMvcConfig;
 import com.hong.spring.common.config.sitemesh.MyConfigurableSiteMeshFilter;
+import com.hong.spring.common.web.filter.CrossScriptingFilter;
+import com.hong.spring.common.web.listener.SessionListener;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -35,7 +39,13 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
 		encodingFilter.setEncoding("UTF-8");
 		encodingFilter.setForceEncoding(true);
-		return new Filter[] { encodingFilter, new HiddenHttpMethodFilter(), new MyConfigurableSiteMeshFilter() };
+		return new Filter[] { encodingFilter, new HiddenHttpMethodFilter(), new CrossScriptingFilter(), new MyConfigurableSiteMeshFilter() };
+	}
+
+	@Override
+	public void onStartup(ServletContext servletContext) throws ServletException {
+		super.onStartup(servletContext);
+		servletContext.addListener(new SessionListener());
 	}
 
 	@Override
