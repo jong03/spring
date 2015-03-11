@@ -12,6 +12,14 @@ gulp.task('clean', function(cb) {
 gulp.task('bower_components_minify_copy', ['clean'], function () {
 	
 	var mappings = {
+		
+		'/parsleyjs/dist/*.min.*' : '/parsleyjs/',
+		'/parsleyjs/src/i18n/ko.js' : '/parsleyjs/i18n/',
+			
+		'/bootstrap/dist/css/*.min.*' : '/bootstrap/css/',
+		'/bootstrap/dist/fonts/*.*' : '/bootstrap/fonts/',
+		'/bootstrap/dist/js/*.min.js' : '/bootstrap/js/',
+			
 		'/font-awesome/fonts/*.*' : '/font-awesome/fonts/',
 		'/font-awesome/css/font-awesome.min.css' : '/font-awesome/css/',
 		
@@ -32,7 +40,9 @@ gulp.task('bower_components_minify_copy', ['clean'], function () {
 		
 		'/handlebars/handlebars.min.js' : '/handlebars/',
 		
-		'/angular/angular.min.js' : '/angular/'
+		'/angular/angular.min.js' : '/angular/',
+		
+		'/underscore/underscore-min.js' : '/underscore/'
 	};
 	
 	for (var k in mappings) {
